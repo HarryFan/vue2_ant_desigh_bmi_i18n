@@ -10,7 +10,7 @@ BMI 計算器元件
     
  
 ```
-javascriptCopy codeimport BMICalculator from '@/components/BMICalculator.vue';export default {  name: 'App',  components: {    BMICalculator,
+import BMICalculator from '@/components/BMICalculator.vue';export default {  name: 'App',  components: {    BMICalculator,
   },
 };
 ```
@@ -19,10 +19,11 @@ javascriptCopy codeimport BMICalculator from '@/components/BMICalculator.vue';ex
     
  
 ```
-htmlCopy code<template>
+<template>
   <div>
     <bmi-calculator />
-  </div></template>
+  </div>
+  </template>
 ```
  
 屬性
