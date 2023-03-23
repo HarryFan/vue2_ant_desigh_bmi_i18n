@@ -1,72 +1,37 @@
-BMI 計算器元件
-=========
- 
-這是一個用 Vue.js 製作的 BMI 計算器元件。使用者可以輸入身高和體重數據，計算 BMI 值，並顯示 BMI 狀態和數值。該元件可以輕鬆地集成到任何 Vue.js 應用程式中，並進行自定義。
- 
-使用方法
-----
- 
-1.  在 Vue.js 應用程式中引入 BMI 計算器元件
-    
- 
-```
-import BMICalculator from '@/components/BMICalculator.vue';export default {  name: 'App',  components: {    BMICalculator,
-  },
-};
-```
- 
-2.  在模板中使用 BMI 計算器元件
-    
- 
-```
-<template>
-  <div>
-    <bmi-calculator />
-  </div>
-  </template>
-```
- 
-屬性
+BMI 計算器
+=======
+
+這是一個使用 Vue 2 和 Ant Design Vue 實現的多語言 BMI 計算器應用。用戶可以輸入身高和體重，並在選擇不同語言時查看結果。支持的語言包括繁體中文、簡體中文、英文和韓文。
+
+功能
 --
- 
-### height
- 
-*   類型：`Number`
+
+*   輸入身高和體重
     
-*   預設值：`null`
+*   計算 BMI（體重指數）
     
- 
-使用者的身高數據。
- 
-### weight
- 
-*   類型：`Number`
+*   支持多語言（繁體中文、簡體中文、英文和韓文）
     
-*   預設值：`null`
-    
- 
-使用者的體重數據。
- 
-計算屬性
-----
- 
-### bmiStatus
- 
-*   類型：`String`
-    
- 
-根據計算出的 BMI 值，返回 BMI 狀態。
- 
-### bmiStatusText
- 
-*   類型：`String`
-    
- 
-根據計算出的 BMI 值，返回 BMI 狀態的文本標籤。
- 
-方法
---
- 
-### calculateBMI()
- 
-根據使用者輸入的身高和體重數據，計算 BMI 值。
+*   在右上角切換語言
+## Project setup
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
