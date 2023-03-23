@@ -13,25 +13,25 @@ BMI 計算器
 *   支持多語言（繁體中文、簡體中文、英文和韓文）
     
 *   在右上角切換語言
-## Project setup
+## 專案設置
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### 編譯和熱重載以進行開發
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### 編譯和壓縮產品版本
 ```
 npm run build
 ```
 
-### Lints and fixes files
+### Lints 和修復文件
 ```
 npm run lint
 ```
 
-### Customize configuration
+### 自定義配置
 See [Configuration Reference](https://cli.vuejs.org/config/).
