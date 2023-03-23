@@ -3,7 +3,7 @@
     <div style="display: flex; justify-content: flex-end; padding: 16px;">
       <a-dropdown>
         <a class="ant-dropdown-link" href="#">
-          {{ $t('language') }}
+          <a-icon type="global" style="margin-right: 8px" /> {{ $t('language') }}
           <a-icon type="down" />
         </a>
         <a-menu slot="overlay" @click="changeLanguage">
