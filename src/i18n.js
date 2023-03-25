@@ -1,66 +1,31 @@
-import Vue from 'vue';
-import VueI18n from 'vue-i18n';
+import Vue from 'vue'; // 引入Vue
+import VueI18n from 'vue-i18n'; // 引入VueI18n
 
 Vue.use(VueI18n);
-const messages = {
-    'zh-TW': {
-        bmiCalculator: 'BMI 計算器',
-        height: '身高（公分）',
-        weight: '體重（公斤）',
-        calculate: '計算',
-        yourBMI: '您的 BMI',
-        language: '語言',
-        normal: '正常',
-        overweight: '過重',
-        obesity: '肥胖',
-        severeObesity: '嚴重肥胖',
-        underweight: '體重過輕',
-    },
-    'zh-CN': {
-        bmiCalculator: 'BMI 计算器',
-        height: '身高（公分）',
-        weight: '体重（公斤）',
-        calculate: '计算',
-        yourBMI: '您的 BMI',
-        language: '语言',
-        normal: '正常',
-        overweight: '过重',
-        obesity: '肥胖',
-        severeObesity: '严重肥胖',
-        underweight: '体重过轻',
-    },
-    'en': {
-        bmiCalculator: 'BMI Calculator',
-        height: 'Height (cm)',
-        weight: 'Weight (kg)',
-        calculate: 'Calculate',
-        yourBMI: 'Your BMI',
-        language: 'Language',
-        normal: 'Normal',
-        overweight: 'Overweight',
-        obesity: 'Obesity',
-        severeObesity: 'Severe Obesity',
-        underweight: 'Underweight',
-    },
-    'ko': {
-        bmiCalculator: 'BMI 계산기',
-        height: '키 (cm)',
-        weight: '체중 (kg)',
-        calculate: '계산',
-        yourBMI: '당신의 BMI',
-        language: '언어',
-        normal: '정상',
-        overweight: '과체중',
-        obesity: '비만',
-        severeObesity: '심각한 비만',
-        underweight: '저체중',
-    },
-};
 
+// 載入所有語言檔案並合併成一個訊息物件
+function loadLocaleMessages() { // 載入語言檔案
+    const locales = require.context('./locales', true, /[A-Za-z0-9-,\s]+.js$/i); // 載入語言檔案
+    const messages = {}; // 建立訊息物件
+    locales.keys().forEach(key => { // 遍歷語言檔案
+        const matched = key.match(/([A-Za-z0-9-]+)./i); // 取得語言檔案名稱
+        if (matched && matched.length > 1) { // 如果取得語言檔案名稱
+            const locale = matched[1]; // 取得語言檔案名稱
+            messages[locale] = locales(key).default; // 將語言檔案加入訊息物件
+        }
+    });
+    return messages; // 回傳訊息物件
+}
 
+// 創建 VueI18n 實例
 const i18n = new VueI18n({
     locale: 'zh-TW', // 預設語言
-    messages,
+    messages: loadLocaleMessages(), // 訊息物件
 });
 
 export default i18n;
+
+// loadLocaleMessages() 函式使用 Webpack 的 require.context() 方法加載所有在 locales 資料夾下的檔案，並根據檔案名稱取得語言區域代碼。最後將所有訊息合併成一個物件返回。
+
+// 這樣修改後，您只需要在 locales 資料夾中新增一個語言檔案，就可以自動載入該語言，不需要在 i18n.js 中手動新增語言。例如，如果您要新增日語支援，只需在 locales 資料夾中新增一個 ja.js 檔案，其中包含日語對應的訊息，就能自動載入日語語言支援。
+
