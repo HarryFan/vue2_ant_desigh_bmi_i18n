@@ -4,23 +4,40 @@ import VueI18n from 'vue-i18n'; // 引入VueI18n
 Vue.use(VueI18n);
 
 // 載入所有語言檔案並合併成一個訊息物件
-function loadLocaleMessages() { // 載入語言檔案
-    const locales = require.context('./locales', true, /[A-Za-z0-9-,\s]+.js$/i); // 載入語言檔案
-    const messages = {}; // 建立訊息物件
-    locales.keys().forEach(key => { // 遍歷語言檔案
-        const matched = key.match(/([A-Za-z0-9-]+)./i); // 取得語言檔案名稱
-        if (matched && matched.length > 1) { // 如果取得語言檔案名稱
-            const locale = matched[1]; // 取得語言檔案名稱
-            messages[locale] = locales(key).default; // 將語言檔案加入訊息物件
+function loadLocaleMessages() {
+    // 使用 Webpack 的 require.context() 方法載入所有符合條件的語言檔案
+    const locales = require.context('./locales', true, /[A-Za-z0-9-,\s]+.js$/i);
+
+    // 建立一個空物件來存放所有語言的訊息
+    const messages = {};
+
+    // 遍歷所有語言檔案，取得語言代碼和該語言對應的訊息
+    locales.keys().forEach(key => {
+        // 取得語言代碼，例如：'zh-TW'
+        const matched = key.match(/([A-Za-z0-9-]+)./i);
+
+        // 如果成功取得語言代碼
+        if (matched && matched.length > 1) {
+            const locale = matched[1]; // 取得語言代碼
+            const messagesForLocale = locales(key).default; // 取得該語言的訊息
+
+            // 將該語言的訊息加入 messages 物件
+            messages[locale] = messagesForLocale;
         }
     });
-    return messages; // 回傳訊息物件
+
+    // 回傳所有語言的訊息
+    return messages;
 }
 
-// 創建 VueI18n 實例
+
+// 載入語言包
+const messages = loadLocaleMessages();
+
+// 創建 VueI18n 實例並設定預設語言和訊息
 const i18n = new VueI18n({
     locale: 'zh-TW', // 預設語言
-    messages: loadLocaleMessages(), // 訊息物件
+    messages: messages, // 合併所有語言的訊息成一個物件
 });
 
 export default i18n;
